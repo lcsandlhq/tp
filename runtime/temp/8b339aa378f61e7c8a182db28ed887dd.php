@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\superconservator\superconservatoruser.html";i:1542001857;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1541992280;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:96:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\superconservator\superconservatoruser.html";i:1542014309;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title></title>
+	<title><?php echo $head['title']; ?> | <?php echo $bt['bt']; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -74,7 +74,9 @@
     border-right: 5px solid transparent;
     border-top: 10px solid #000;
 }
-
+#example{
+	margin-top: 15px;
+}
 /*.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th{*/
 	/*background: #D8DDE6;*/
 /*}*/
@@ -118,22 +120,6 @@
 							</div>
 							<div class="box-body">
 								<div class="tabbable header-tabs">
-								<ul class="nav nav-tabs">
-									<li>
-										<a href="">
-											<i class="fa fa-street-view"></i>
-											<span class="hidden-inline-mobile">用户来源</span>
-										</a>
-									</li>
-									<li><a href="" ><i class="fa fa-sitemap"></i> <span class="hidden-inline-mobile">权限分组</span></a></li>
-									<li class="active">
-									 	<a href="<?php echo url('Superconservator/superconservatoruser'); ?>" >
-									 		<i class="fa fa-user-plus"></i>
-									 		<span class="hidden-inline-mobile">用户管理</span>
-									 	</a>
-									</li>
-								</ul>
-
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="box_tab4">
 									 <!-- 临床信息录入 -->
@@ -141,14 +127,26 @@
 								 	<table id="example" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="px " data-paixu="" data-pxname="user">用户名<span class="user_triangle"></span></th>
+												<th>用户名</th>
 												<th>密码</th>
-												<th class="px" data-paixu="" data-pxname="act">激活状态</th>
-												<th class="px" data-paixu="" data-pxname="group">权限管理</th>
-												<th class="px" data-paixu="" data-pxname="source">来源管理</th>
-												<th>操作</th>
+												<th>项目</th>
+												<th>结算价</th>
+												<th>负责人</th>
+												<!-- <th>操作</th> -->
 											</tr>
 										</thead>
+										<tbody id="idData">
+											<?php if(is_array($loginxs) || $loginxs instanceof \think\Collection || $loginxs instanceof \think\Paginator): $i = 0; $__LIST__ = $loginxs;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$xs): $mod = ($i % 2 );++$i;?>
+											<tr>
+												<td><?php echo $xs['account']; ?></td>
+												<td><?php echo $xs['pwdming']; ?></td>
+												<td><?php echo $xs['projectname']; ?></td>
+												<td><?php echo $xs['settlementprice']; ?></td>
+												<td><?php echo $xs['head']; ?></td>
+												<!-- <td></td> -->
+											</tr>
+											<?php endforeach; endif; else: echo "" ;endif; ?>
+										</tbody>
 									</table>
 									</div>
 								</div>
@@ -168,7 +166,9 @@
 </section>
 
 </body>
+<script src="/static/js/jquery/mock.js"></script>
 <script src="/static/js/jquery/jquery-2.0.3.min.js"></script>
+<script src="/static/js/jquery/jquery.dropdown.js"></script>
 <script src="/static/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 <!--<script src="/static/bootstrap-dist/js/bootstrap.min.js"></script>-->
 <script src="/static/js/bootstrap-daterangepicker/moment.min.js"></script>

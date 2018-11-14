@@ -4,6 +4,84 @@
 	<div class="sidebar-menu nav-collapse">
 		<div class="divide-20"></div>
 		<ul class="indexUl">
+			{if ($permissions == 1 or $permissions == 2)}
+			<li class="has-sub">
+				<a class="">
+				<img class="sidebar_icon" src="__PUBLIC__/img/newIcon/icon_The sample.png" alt=""><span class="menu-text">实验室</span>
+				<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li>
+						<a class="" href="{:url('Informationregister/InformationRegister')}" target='demo_frame'>
+							<span class="sub-menu-text">信息登记</span>
+						</a>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">建库管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>1])}" target='demo_frame'>
+								<span class="sub-menu-text">未建库</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>2])}" target='demo_frame'>
+								<span class="sub-menu-text">已建库</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">上机管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>3])}" target='demo_frame'>
+								<span class="sub-menu-text">未上机</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>4])}" target='demo_frame'>
+								<span class="sub-menu-text">已上机</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">数据分析管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>5])}" target='demo_frame'>
+								<span class="sub-menu-text">未数据分析</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>6])}" target='demo_frame'>
+								<span class="sub-menu-text">已数据分析</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>7])}" target='demo_frame'>
+							<span class="sub-menu-text">报告下载</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			{/if}
+			<li class="has-sub">
+				<a href="{:url('Thequery/thequery')}" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="__PUBLIC__/img/newIcon/icon_retrieval.png" alt="">
+					<span class="menu-text">查询</span>
+				</a>
+			</li>
+			{if ($permissions == 1)}
 			<li class="has-sub">
 				<a class="">
 				<img class="sidebar_icon" src="__PUBLIC__/img/newIcon/icon_setting.png" alt=""><span class="menu-text">系统管理</span>
@@ -13,6 +91,7 @@
 					<li><a class="" href="{:url('Superconservator/superconservatoruser')}" target='demo_frame'><span class="sub-menu-text">用户管理</span></a></li>
 				</ul>
 			</li>
+			{/if}
 		</ul>
 	</div>
 </div>

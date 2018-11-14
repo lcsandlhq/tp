@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:101:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\superconservator\superconservator_user_add.html";i:1542003500;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1541992280;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:101:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\superconservator\superconservator_user_add.html";i:1542084870;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542076217;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title></title>
+	<title><?php echo $head['title']; ?> | <?php echo $bt['bt']; ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -24,6 +24,12 @@
 	
 <link  rel="stylesheet" href="/static/css/jquery.dropdown.css" />
 <link rel="stylesheet" href="/static/css/inputting.css">
+<style type="text/css">
+	#permissions{
+	    margin-left: 12px;
+		margin-right: 10px;
+	}
+</style>
 
 </head>
 <body>
@@ -37,7 +43,7 @@
 					<div class="col-sm-12">
 						<div class="page-header">
 							<div class="clearfix">
-								<h3 class="content-title pull-left">TA临床信息管理界面</h3>
+								<h3 class="content-title pull-left">二代测试管理界面</h3>
 							</div>
 							<ul class="breadcrumb">
 								<li>
@@ -63,8 +69,8 @@
 									</ul>
 								    <div class="tab-content">
 									 	<div class="tab-pane fade in active" id="box_tab4">
-									 	<!-- 临床信息录入 -->
-									 		<form action="<?php echo url('Clinical/addclinical'); ?>" method="post" id="formID" onkeydown="if(event.keyCode==13)return false;">
+									 	<!-- 临床信息录入  onkeydown="if(event.keyCode==13)return false;"-->
+									 		<form action="<?php echo url('Superconservator/SuperconservatorUserAdd'); ?>" method="post" id="formID">
 										 		<div class="clinical_listBox">
 											 		<div class="clinical_inputting_info">
 											 			<img src="/static/img/newIcon/avatar large.png" alt="">
@@ -79,32 +85,42 @@
 																  	<div class="col-md-4 .col-lg-4 .col-sm-4">
 															 			<div class="inputting_listTltie">* 账号</div>
 															 			<div>
-															 				<input class="inputting_listInput" type="text" name="number" id="number"/>
+															 				<input class="inputting_listInput" type="text" name="account" id="account"/>
 															 			</div>
-																		<div class="inputting_listTltie">联系方式</div>
-																		<div>
-																			<input class="inputting_listInput" type="text" name="tel_1" id="tel_1" />
+																		<div class="inputting_listTltie">* 项目</div>
+																		<div class="inputting_checkTltie">
+																			<table id="example" cellpadding="0" cellspacing="0" border="0" class="table">
+																				<thead id="volistThead">
+																					<tr>
+																						<?php if(is_array($project) || $project instanceof \think\Collection || $project instanceof \think\Paginator): $k = 0; $__LIST__ = $project;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$pt): $mod = ($k % 2 );++$k;?>
+																						
+																						<td>
+																							<input type="checkbox" name="check[]" value="<?php echo $pt['id']; ?>" />
+																							<?php echo $pt['projectname']; ?>
+																						</td>
+																						<?php if(( $k % 3 ==0 )): ?></tr><tr><?php endif; endforeach; endif; else: echo "" ;endif; ?>
+																					</tr>
+																				</thead>
+																			</table>
+																			
 																		</div>
-																		<div class="inputting_listTltie">* 来源医院</div>
-														  				
-														  				<div class="dropdown-sin-1">
-	                                                        				<select style="display:block;width:100%" class="inputting_listInput" placeholder="请选择来源" name="source_hospital" >
-	                                                            				<option selected value="">请选择</option>
-	                                                            				<option value=""></option>
-	                                                        				</select>
-	                                                    				</div>
-	                                                    				<div class="inputting_listTltie">* 性别</div>
+	                                                    				<div class="inputting_listTltie">* 结算价</div>
 																		<div>
-																			<select class="inputting_listInput" name="gender">
-																				<option value="男">男</option>
-																				<option value="女" selected="selected">女</option>
-																				<option value="未登记">未登记</option>
-																			</select>
+																			<input class="inputting_listInput" type="text" name="settlementprice" id="settlementprice"/>
+																		</div>
+																		<div class="inputting_listTltie">* 负责人</div>
+																		<div>
+																			<input class="inputting_listInput" type="text" name="head" id="head"/>
+																		</div>
+																		<div class="inputting_listTltie">* 权限</div>
+																		<div>
+																			<input class="dxk" type="radio" name="permissions" id="permissions" value="0" checked="checked" />普通用户
+																			<input class="dxk" type="radio" name="permissions" id="permissions" value="2" />实验室
 																		</div>
 															 		</div>
 															 	</div>
 															 	<div class="infoBox">
-																	<input type="button" id="subBtn" value="提交">
+																	<input type="submit" id="subBtn" value="提交">
 														 		</div>
 															</div>
 														</div>

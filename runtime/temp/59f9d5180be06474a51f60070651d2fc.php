@@ -1,21 +1,22 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\login\login.html";i:1542014728;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>{$head.title} | 登录</title>
+    <title><?php echo $head['title']; ?> | 登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/cloud-admin.css">
-    <link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/uniform/css/uniform.default.min.css"/>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/animatecss/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/cloud-admin.css">
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/js/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/js/uniform/css/uniform.default.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/animatecss/animate.min.css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     <style>
         body {
-            background: url("__PUBLIC__/img/newIcon/login_bg.png") no-repeat;
+            background: url("/static/img/newIcon/login_bg.png") no-repeat;
             background-size: 100% 1000px;
         }
         .login-box-plain {
@@ -98,7 +99,7 @@
                         <h2 class="bigintro">登  录</h2>
                         <div class="divide-40"></div>
 
-                        <form role="form" action="{:url('Login/logindl')}" method="post">
+                        <form role="form" action="<?php echo url('Login/logindl'); ?>" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">登录名 </label>
                                 <!--<i class="fa fa-envelope"></i>-->
@@ -119,15 +120,15 @@
             </div>
 
             <!-- <div class="login-icon">
-                <img class="login-foot" src="__PUBLIC__/img/newIcon/logo.png" alt="">
+                <img class="login-foot" src="/static/img/newIcon/logo.png" alt="">
             </div> -->
         </div>
     </section>
 </section>
-<script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js"></script>
-<script src="__PUBLIC__/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="__PUBLIC__/bootstrap-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/uniform/jquery.uniform.min.js"></script>
-<script src="__PUBLIC__/js/script.js"></script>
+<script src="/static/js/jquery/jquery-2.0.3.min.js"></script>
+<script src="/static/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/static/bootstrap-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/uniform/jquery.uniform.min.js"></script>
+<script src="/static/js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-{__NOLAYOUT__}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:58:"E:\wamp\www\aiyics\thinkphp\thinkphp\tpl\dispatch_jump.tpl";i:1528684348;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -123,16 +124,13 @@
 </head>
 <body>
     <div class="system-message">
-        <?php switch ($code) {?>
-            <?php case 1:?>
+        <?php switch ($code) {case 1:?>
             <div class="success_box"><div class="success_txt"></div></div>
             <p class="success"><?php echo(strip_tags($msg));?></p>
-            <?php break;?>
-            <?php case 0:?>
+            <?php break;case 0:?>
             <div class="success_box1"><div class="success_txt1">x</div></div>
             <p class="error"><?php echo(strip_tags($msg));?></p>
-            <?php break;?>
-        <?php } ?>
+            <?php break;} ?>
         <p class="detail"></p>
         <p class="jump">
             页面自动 <a id="href" href="<?php echo($url);?>">跳转</a> 等待时间： <b id="wait"><?php echo($wait);?></b>

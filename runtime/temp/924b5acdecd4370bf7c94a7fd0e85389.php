@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:70:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\index\index.html";i:1541991528;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\base.html";i:1541989552;s:64:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\header.html";i:1541992670;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\left.html";i:1541999616;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:70:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\index\index.html";i:1541991528;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\base.html";i:1541989552;s:64:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\header.html";i:1542157473;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\left.html";i:1542186747;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +48,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="">密码修改</a></li>
-						<li><a href=""><i class="fa fa-power-off"></i>退出</a></li>
+						<li><a href="<?php echo url('Login/loginexit'); ?>"><i class="fa fa-power-off"></i>退出</a></li>
 					</ul>
 				</li>
 				<li><img class="icon_head" src="/static/img/newIcon/icon_head.png" alt=""></li>
@@ -62,6 +62,84 @@
 	<div class="sidebar-menu nav-collapse">
 		<div class="divide-20"></div>
 		<ul class="indexUl">
+			<?php if(($permissions == 1 or $permissions == 2)): ?>
+			<li class="has-sub">
+				<a class="">
+				<img class="sidebar_icon" src="/static/img/newIcon/icon_The sample.png" alt=""><span class="menu-text">实验室</span>
+				<span class="arrow"></span>
+				</a>
+				<ul class="sub">
+					<li>
+						<a class="" href="<?php echo url('Informationregister/InformationRegister'); ?>" target='demo_frame'>
+							<span class="sub-menu-text">信息登记</span>
+						</a>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">建库管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>1]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">未建库</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>2]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">已建库</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">上机管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>3]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">未上机</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>4]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">已上机</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a>
+							<span class="sub-menu-text">数据分析管理</span>
+						</a>
+						<ul class="sub">
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>5]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">未数据分析</span>
+								</a>
+							</li>
+							<li>
+								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>6]); ?>" target='demo_frame'>
+								<span class="sub-menu-text">已数据分析</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>7]); ?>" target='demo_frame'>
+							<span class="sub-menu-text">报告下载</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<?php endif; ?>
+			<li class="has-sub">
+				<a href="<?php echo url('Thequery/thequery'); ?>" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="/static/img/newIcon/icon_retrieval.png" alt="">
+					<span class="menu-text">查询</span>
+				</a>
+			</li>
+			<?php if(($permissions == 1)): ?>
 			<li class="has-sub">
 				<a class="">
 				<img class="sidebar_icon" src="/static/img/newIcon/icon_setting.png" alt=""><span class="menu-text">系统管理</span>
@@ -71,6 +149,7 @@
 					<li><a class="" href="<?php echo url('Superconservator/superconservatoruser'); ?>" target='demo_frame'><span class="sub-menu-text">用户管理</span></a></li>
 				</ul>
 			</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </div>

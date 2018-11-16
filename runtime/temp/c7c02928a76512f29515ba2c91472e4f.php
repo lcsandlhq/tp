@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:99:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\informationregister\information_register.html";i:1542174469;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:99:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\informationregister\information_register.html";i:1542339219;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +70,7 @@
 								    <div class="tab-content">
 									 	<div class="tab-pane fade in active" id="box_tab4">
 									 	<!-- 临床信息录入  onkeydown="if(event.keyCode==13)return false;"-->
-									 		<form action="<?php echo url('Informationregister/InformationregisterSampleAdd'); ?>" method="post" id="formID">
+									 		<form action="<?php echo url('Informationregister/InformationregisterSampleAdd'); ?>" method="post" id="formID" onkeydown="if(event.keyCode==13)return false;">
 										 		<div class="clinical_listBox">
 											 		<div class="clinical_inputting_info">
 											 			<img src="/static/img/newIcon/avatar large.png" alt="">
@@ -96,7 +96,7 @@
 																		<div>
 																			<input class="inputting_listInput" type="text" name="username" id="username"/>
 																		</div>
-	                                                    				<div class="inputting_listTltie">* 癌种</div>
+	                                                    				<div class="inputting_listTltie">癌种</div>
 																		<div class="inputting_checkTltie">
 																			<table id="example" cellpadding="0" cellspacing="0" border="0" class="table">
 																				<thead id="volistThead">
@@ -112,7 +112,7 @@
 																				</thead>
 																			</table>
 																		</div>
-																		<div class="inputting_listTltie">* 样本类型</div>
+																		<div class="inputting_listTltie">样本类型</div>
 																		<div class="inputting_checkTltie">
 																			<table id="example" cellpadding="0" cellspacing="0" border="0" class="table">
 																				<thead id="volistThead">
@@ -154,12 +154,12 @@
                                                             			<div class="inputting_listTltie">* 性别</div>
 																		<div>
 																			<input class="" type="radio" name="gender" id="gender" value="男" />男
-																			<input class="" type="radio" name="gender" id="gender" value="女" />女
+																			<input class="" type="radio" name="gender" id="gender" value="女" checked="checked" />女
 																		</div>
 															 		</div>
 															 	</div>
 															 	<div class="infoBox">
-																	<input type="submit" id="subBtn" value="保存">
+																	<input type="submit" id="subBtn" value="保存" >
 														 		</div>
 															</div>
 														</div>
@@ -231,5 +231,27 @@ $(".dropdown-sin-1>.dropdown-main>ul>.dropdown-option").click(function () {
 	       alert(textStatus);
 		}
 	})
+});
+$("#subBtn").click(function(){
+	var account=$("select[name=account]").val();
+	var username=$("input[name=username]").val();
+	var age=$("input[name=age]").val();
+	var project=$("select[name=project]").val();
+	if (account == '') {
+		alert('请选择账号');
+		return false;
+	}else if(username == ''){
+		alert('姓名不能为空');
+		return false;
+	}else if(age == ''){
+		alert('性别不能为空');
+		return false;
+	}else if(project == ''){
+		alert('请选择检测项目');
+		return false;
+	}else{
+		$('#formID').submit();
+	}
+	return false;
 });
 </script>

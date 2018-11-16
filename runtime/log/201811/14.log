@@ -25471,3 +25471,35 @@
   1 => 'bt',
 ) ]
 [ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-11-14T17:27:01+08:00 ] 127.0.0.1 GET web.ay.com/index/thequery/thequery.html
+[运行时间：0.043295s] [吞吐率：23.10req/s] [内存消耗：259.95kb] [文件加载：44]
+[ info ] [ LANG ] E:\wamp\www\aiyics\thinkphp\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'thequery',
+    2 => 'thequery',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ay.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3573.0 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ay.com/',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'pgv_pvi=4177056768; user=%7B%22id%22%3A1%2C%22account%22%3A%22admin%22%2C%22pwdan%22%3A%227b464b4cd213635d8987b63d01d96f48%22%2C%22pwdming%22%3A%22218807%22%2C%22head%22%3Anull%2C%22settlementprice%22%3Anull%2C%22superconservator%22%3A%221%22%2C%22khdate%22%3Anull%7D',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Thequery->thequery[ E:\wamp\www\aiyics\thinkphp\ay_app\index\controller\Thequery.php ]
+[ info ] [ VIEW ] E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\thequery\thequery.html [ array (
+  0 => 'head',
+  1 => 'bt',
+) ]
+[ info ] [ LOG ] INIT File

@@ -15,4 +15,8 @@ class Sampletype extends Model
 	{
 		return self::$sampletype_db->select();
 	}
+	public function selectsarcinomawhere($value)
+	{
+		return self::$sampletype_db->where($value)->select();
+	}
 }

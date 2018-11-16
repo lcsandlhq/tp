@@ -62,6 +62,43 @@ class Buildlibrarymanagement extends Base
 				$conditions['sample']=5;
 				$querydata=self::$informationregister->dataQuery($conditions);
 				break;
+			case '8':
+				$bt['hasnot']='查询';
+				$bt['bt']='查询';
+				$bt['state']='';
+				$conditions=array();
+				// echo self::$user_db['superconservator'];
+				if (self::$user_db['superconservator']) {
+					if (!empty(input("account"))) {
+						$conditions['lid']=input("account");
+						$keyword['account']=input("account");
+					}
+				}else{
+					// echo self::$user_db['id'];;
+					$conditions['lid']=self::$user_db['id'];
+				}
+				if (!empty(input("username"))) {
+					$conditions['username']=input("username");
+					$keyword['username']=input("username");
+				}
+				if (!empty(input("sampledate"))) {
+					$date=input("sampledate");
+					$sampledate=explode('~',$date);
+					$conditions['sampledate']=array(["<=",$sampledate[1]],[">=",$sampledate[0]],'and');
+					$keyword['sampledate']=$date;
+				}
+				if (!empty(input("sample"))) {
+					$conditions['sample']=input("sample");
+					$keyword['sample']=input("sample");
+				}
+				if (empty($conditions)) {
+					$conditions=1;
+				}
+				$keyword['hasnot']=8;
+				// print_r($conditions);
+				$querydata=self::$informationregister->dataQueryCX($conditions,$keyword);
+				// echo $querydata;
+				break;
 			default:
 				exit();
 				break;

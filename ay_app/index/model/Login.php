@@ -27,4 +27,8 @@ class Login extends Model
 	{
 		return self::$login_db->field('id,account')->where('superconservator',0)->select();
 	}
+	public function fzdw()
+	{
+		return self::$login_db->field('id,head')->where('superconservator',0)->group('head')->select();
+	}
 }

@@ -1,0 +1,79 @@
+{extend name="public:cssjs" /}
+{block name="main"}
+<section id="page">
+		<!-- SIDEBAR 侧边栏-->
+	<div class="container" style="height: 100%;">
+		<div class="row" style="height: 100%;">
+			<div id="content" class="col-lg-12">
+				<!-- PAGE HEADER-->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="page-header">
+							<div class="clearfix">
+								<h3 class="content-title pull-left">{$bt.bt}</h3>
+							</div>
+							<ul class="breadcrumb">
+								<li>
+									<span>您目前所在的位置:</span>
+									<!-- <i class="fa fa-home"></i> -->
+									<a href="#">{$bt.bt}</a>
+								</li>
+								<!--<li>user_tables</li>-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<!-- BOX -->
+						<div class="box border">
+							<div class="box-title">
+								<h4><i class="fa fa-th"></i><span class="hidden-inline-mobile">{$bt.bt}</span></h4>	
+							</div>
+							<div class="box-body">
+								<div class="tabbable header-tabs">
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="box_tab4">
+									 <!-- 临床信息录入 -->
+									<!-- <input id="addTables" type="button" value="添加"> -->
+								 	<table id="example" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>来源</th>
+												<th>样品数量</th>
+												<th>总价格</th>
+											</tr>
+										</thead>
+										<tbody id="idData">
+											<tr>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												
+											</tr>
+											<tr>
+												<td colspan="3" style="text-align: center;">未查到数据......</td>
+											</tr>
+										</tbody>
+									</table>
+									</div>
+								</div>
+							    </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-tools">
+					<span class="go-top">
+						<i class="fa fa-chevron-up"></i> Top
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+</script>
+{/block}

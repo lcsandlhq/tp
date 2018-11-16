@@ -78,6 +78,7 @@
 											{/empty}
 										</tbody>
 									</table>
+									{$querydata->render()}
 									</div>
 								</div>
 							    </div>
@@ -151,7 +152,7 @@ document.getElementById('button').onclick=function() {
         }  
     }
     if (ids == '') {
-    	alert("请选择建库数据");
+    	alert("请选择数据");
     }else{
     	$.ajax({
     		"type":"post",
@@ -172,7 +173,7 @@ document.getElementById('button').onclick=function() {
                 //  window.location.reload() 
             },  
             error : function(data) {  
-                alert("系统错误，建库失败");  
+                alert("网络错误，请检查网络");  
             }  
     	});
     }

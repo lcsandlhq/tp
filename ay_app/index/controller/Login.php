@@ -20,7 +20,7 @@ class Login extends Controller
 		$login['account']=input('post.account');
 		$login['pwdan']=md5(input('post.password'));
 		$loginxx = self::$login->loginuserdl($login);
-		Cookie::set('user',$loginxx,86400);
+		Cookie::set('user',$loginxx,86400);#
 		$this->success('登录成功','Index/index','',1);
 	}
 	public function loginexit()

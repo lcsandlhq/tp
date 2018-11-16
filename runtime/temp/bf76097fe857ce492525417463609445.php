@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:106:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\buildlibrarymanagement\build_library_management.html";i:1542175069;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\list.html";i:1542184141;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:106:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\buildlibrarymanagement\build_library_management.html";i:1542175069;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\list.html";i:1542264660;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,6 +104,7 @@
 											<?php endif; ?>
 										</tbody>
 									</table>
+									<?php echo $querydata->render(); ?>
 									</div>
 								</div>
 							    </div>
@@ -177,7 +178,7 @@ document.getElementById('button').onclick=function() {
         }  
     }
     if (ids == '') {
-    	alert("请选择建库数据");
+    	alert("请选择数据");
     }else{
     	$.ajax({
     		"type":"post",
@@ -198,7 +199,7 @@ document.getElementById('button').onclick=function() {
                 //  window.location.reload() 
             },  
             error : function(data) {  
-                alert("系统错误，建库失败");  
+                alert("网络错误，请检查网络");  
             }  
     	});
     }

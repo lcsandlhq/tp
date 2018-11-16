@@ -1,5 +1,6 @@
 {extend name="public:cssjs" /}
 {block name="css"}
+<link  rel="stylesheet" href="/static/css/jquery.dropdown.css" />
 <link rel="stylesheet" href="__PUBLIC__/css/inputting.css">
 <style>
 .classA:hover{ text-decoration:none;}
@@ -48,6 +49,10 @@ ul.showul li:not(:last-child) {
 .infoBox input{
     margin: 0 50px 50px;
 }
+.dropdown-display{
+    width: 100%;
+    height: 32px;
+}
 </style>
 {/block}
 {block name="main"}
@@ -59,12 +64,12 @@ ul.showul li:not(:last-child) {
                     <div class="col-sm-12">
                         <div class="page-header">
                             <div class="clearfix">
-                                <h3 class="content-title pull-left">TA综合检索界面</h3>
+                                <h3 class="content-title pull-left">{$bt.bt}界面</h3>
                             </div>
                             <ul class="breadcrumb">
                                 <li>
                                     <span>您目前所在的位置:</span>
-                                    <a>综合检索</a>
+                                    <a>{$bt.bt}</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,110 +83,52 @@ ul.showul li:not(:last-child) {
                             </div>
                             <div class="box-body">
                                 <div class="tabbable header-tabs">
-                                    <!--<ul class="nav nav-tabs">-->
-                                        <!--<li class="active">-->
-                                            <!--<a href="">-->
-                                                <!--<i class="fa fa-hotel"></i>-->
-                                                <!--<span class="hidden-inline-mobile">综合检索</span>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
                                     <div class="tab-content">
                                         <div class="tab-pane fade in active" id="box_tab4">
-                                            <!---->
-
-                                            <form action="{:url('Retrieve/integratedretrievalaccording')}" method="post" enctype="multipart/form-data">
+                                            <form action="{:url('Buildlibrarymanagement/BuildLibraryManagement')}" method="post" enctype="multipart/form-data">
                                                 <div class="clinical_listBox">
-                                                <div class="clinical_inputting_info">
-                                                    <img src="/static/img/newIcon/icon_Medical records2.png" alt="">
-                                                    <span class="avatar_span1">综合检索</span>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                                            <div class="inputting_listTltie">批次（可搜索批次范围 如“23-45”）:</div>
-                                                            <div class=""  style="position:relative;">
-                                                                 <input class="js-typeahead inputting_listInput" name="batchID" type="search" id="search" data-provide="typeahead" data-items="4">
-                                                                <span class="fa fa-times-circle inputting_times" style="position: absolute;right:25px;top:10px;display:none"></span>
-                                                            </div>
-
-                                                            <div class="inputting_listTltie">采样时间:</div>
-                                                            <div class="" style="position:relative;">
-                                                                <input type="text" name="getDate"  autoComplete='off' id="reportrange" value="" class="inputting_listInput" style="margin: 0 10px 0 0;">
-                                                                <span class="fa fa-times-circle inputting_circle" style="position: absolute;right:25px;top:10px;display:none"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                                            <div class="inputting_listTltie">来源:</div>
-                                                            <div class="dropdown-sin-1">
-                                                                <select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索来源" name="ly" >
-                                                                    <option selected value="">不限</option>
-                                                                    <option value=""></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                                            <div class="inputting_listTltie">项目:</div>
-                                                            <div class="dropdown-sin-2">
-                                                                <select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索项目" name="project" >
-                                                                    <option selected value="">不限</option>
-                                                                    <option value=""></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="row">
-                                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                                            <div class="inputting_listTltie">健康状态:</div>
-                                                            <div class="">
-
-                                                                    <select class="inputting_listInput" name="health">
-                                                                        <option value="">全部</option>
-                                                                        <option value="健康人">健康人</option>
-                                                                        <option value="患者">患者</option>
+	                                                <div class="clinical_inputting_info">
+	                                                    <img src="/static/img/newIcon/icon_Medical records2.png" alt="">
+	                                                    <span class="avatar_span1">{$bt.bt}</span>
+	                                                </div>
+	                                                <div class="container">
+	                                                    <div class="row">
+	                                                        <div class="col-md-4 col-lg-4 col-sm-4">
+	                                                            <div class="inputting_listTltie">来源</div>
+	                                                            <div class="dropdown-sin-1">
+                                                                    <select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索来源" name="account" >
+                                                                        <option value="">请选择</option>
+                                                                        {volist name="lydw" id="ly"}
+                                                                        <option value="{$ly.id}">{$ly.account}</option>
+                                                                        {/volist}
                                                                     </select>
-                                                                <!--<select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索批次" name="" >-->
-                                                                    <!--<option disabled selected value="">全部</option>-->
-                                                                <!--</select>-->
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                                            <div class="inputting_listTltie">报告级别:</div>
-                                                            <div class="">
-                                                                <select class="inputting_listInput" name="level1">
-                                                                    <option value="0">不限</option>
-                                                                    <option value="11">I</option>
-                                                                    <option value="22">II</option>
-                                                                    <option value="33">III</option>
-                                                                    <option value="44">IV</option>
-                                                                    <option value="55">V</option>
-                                                                </select>
-                                                                <!--<select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索批次" name="" >-->
-                                                                    <!--<option disabled selected value="">不限</option>-->
-                                                                <!--</select>-->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="col-md-6 col-lg-6 col-sm-6">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputPassword1" class="inputting_listTltie">关键字</label>
-                                                                <i class="fa fa-search"></i>
-                                                                <input type="text" class="form-control" id="exampleInputPassword1" style="padding-left: 33px !important" name="keyword">
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                                                </div>
+                                                                <div class="inputting_listTltie">样本姓名</div>
+                                                                    <div>
+                                                                        <input class="inputting_listInput" type="text" name="username" id="username"/>
+                                                                    </div>
+	                                                            <div class="inputting_listTltie">到样时间:</div>
+	                                                            <div class="" style="position:relative;">
+	                                                                <input type="text" name="sampledate"  autoComplete='off' id="reportrange" value="" class="inputting_listInput" style="margin: 0 10px 0 0;">
+	                                                                <span class="fa fa-times-circle inputting_circle" style="position: absolute;right:25px;top:10px;display:none"></span>
+	                                                            </div>
+                                                                <div class="inputting_listTltie">状态:</div>
+                                                                <div class="dropdown-sin-2">
+                                                                    <select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索状态" name="sample" >
+                                                                        <option selected value="">请选择</option>
+                                                                        <option value="1">已到样</option>
+                                                                        <option value="2">建库中</option>
+                                                                        <option value="3">上机中</option>
+                                                                        <option value="4">数据分析</option>
+                                                                        <option value="5">下载</option>
+                                                                    </select>
+                                                                </div>
+	                                                        </div>
+	                                                    </div>
+	                                                </div>
                                                 </div>
                                                 <div class="infoBox">
+                                                    <input type="hidden" value="8" name="hasnot">
                                                     <input type="submit" value="搜索">
                                                 </div>
                                             </form>
@@ -195,12 +142,15 @@ ul.showul li:not(:last-child) {
             </div>
         </div>
     </div>
-    </div>
 </section>
 {/block}
 {block name="js"}
 <script type="text/javascript">
 	jQuery(document).ready(function () {
+        $('.dropdown-sin-1').dropdown({
+            readOnly: true,
+            input: '<input type="text" maxLength="20" placeholder="请输入搜索">'
+        });
         // App.setPage("dynamic_table");  //Set current page
         // App.init(); //Initialise plugins and elements
 

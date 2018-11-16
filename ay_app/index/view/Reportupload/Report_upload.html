@@ -1,0 +1,131 @@
+{extend name="public:cssjs" /}
+{block name="css"}
+<link rel="stylesheet" href="__PUBLIC__/css/RightWrong.css">
+<style>
+.input-sm {
+    width: 200px;
+}
+
+select .input-sm {
+    width: 75px !important;
+}
+
+.displaycode_downLists{
+    border: 1px solid #D8DDE6;
+    border-radius: 4px;
+    width: 110px;
+    height: 30px;
+    text-align: center;
+    line-height:25px;
+    display: inline-block;
+}
+.displaycode_downLists a{
+    font-size: 12px;
+    color: #0070D2;
+    margin:0;
+}
+</style>
+{/block}
+{block name="main"}
+<section id="page">
+    <div class="container heightDataAll">
+        <div class="row heightDataAll">
+            <div id="content" class="col-lg-12">
+                <!-- PAGE HEADER-->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-header">
+                            <div class="clearfix">
+                                <h3 class="content-title pull-left">{$bt.bt}管理界面</h3>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li>
+                                    <span>您目前所在的位置:</span>
+                                    <a href="#">{$bt.bt}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="displaycode_addLists">
+                    <form  class="displaycode_file" action="{:url('Reportupload/ReportUploadFile')}" method="post"
+                          enctype="multipart/form-data">
+                        <a href='javascript:void(0);' class="blueButton">+ 选择文件</a>
+                        <input name="file" type="file" class="form-control" id="file" multiple="multiple">
+                        <div class="show">未选择任何文件</div>
+                        <button type="button" name="sub" class="submit">上传</button>
+                    </form>
+                </div>
+                <div class="footer-tools">
+                    <span class="go-top">
+                        <i class="fa fa-chevron-up"></i> Top
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name="js"}
+<script>
+$(".form-control").change(function() {
+    // console.log('122121212');
+    // alert('1212')
+    var arrs=$(this)[0].files.length;
+    // console.log('1212')
+    // alert(arrs)
+    var filename = '已选'+arrs+'文件';
+    // var arrs=$(this).val().split('\\');
+    // var filename=arrs[arrs.length-1];
+    $(".show").html(filename);
+    // console.log(filename)
+});
+$(".submit").click(function(){
+    // console.log('1212')
+    if($("#file").val() == ''){
+        alert('请先选择文件！');
+    }else{
+        // $('.sample_batch_shaow_jz').css('display','block');
+        upload();
+    }
+})
+function upload(){
+    // alert('1232123');
+    var files = document.getElementById('file').files;
+    // console.log(file)
+    var form = new FormData();
+    // var files = $("#file1")[0].files;//等价于document.getElementById("file1").files;  
+    for(var i = 0; i < files.length; i++){  
+        form.append("file[]",files[i]);   // 文件对象 ,fileupload必须加中括号   
+    } 
+    // console.log(files.length);
+    $.ajax({
+        url: "{:url('Reportupload/ReportUploadFile')}",//上传地址
+        dataType : 'json',
+        async: true,//异步
+        type: 'post',//post方式
+        data: form,//FormData数据
+        processData: false,//不处理数据流 !important
+        contentType: false,//不设置http头 !important
+        success: function(date){
+            //上传成功回调
+            // console.log("文档当前位置是："+data);//获取文件链接
+            // document.cookie = "url="+data;//此行可忽略
+            
+            // console.log(date);
+            // alert("hhh");  
+            
+            if (date.cgsb == '1') {
+                alert(date.sfcg);
+                window.location.reload()
+            }else{
+                alert(date.sfcg);
+            }
+        },
+        error: function(data){
+            alert("网络错误，请检查网络");  
+        }
+    })
+}
+</script>
+{/block}

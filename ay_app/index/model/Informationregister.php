@@ -21,10 +21,18 @@ class Informationregister extends Model
 	}
 	public function dataQuery($value)
 	{
-		return self::$informationregister_db->alias('i')->field("i.id,number,i.username,s.sampletypename,i.sampledate,i.completedate,i.sample")->join('er_sampletype s','i.sampletype=s.id','LEFT')->where($value)->select();
+		return self::$informationregister_db->alias('i')->field("i.id,number,i.username,s.sampletypename,i.sampledate,i.completedate,i.sample")->join('er_sampletype s','i.sampletype=s.id','LEFT')->where($value)->order('i.sampledate DESC')->paginate(30,false);
+	}
+	public function dataQueryCX($value,$keyword)
+	{
+		return self::$informationregister_db->alias('i')->field("i.id,number,i.username,s.sampletypename,i.sampledate,i.completedate,i.sample")->join('er_sampletype s','i.sampletype=s.id','LEFT')->where($value)->order('i.sampledate DESC')->paginate(30,false,array('query'=>$keyword));
 	}
 	public function dataModification($where,$value)
 	{
 		return self::$informationregister_db->where($where)->update($value);
+	}
+	public function financial()
+	{
+		return self::$informationregister_db->alias('i')->field("l.account,GROUP_CONCAT(i.sampletype separator ',') AS sampletype")->join('er_login l','i.lid=l.id ','LEFT')->group('i.lid')->select();//paginate(30,false,array('query'=>$keyword));
 	}
 }

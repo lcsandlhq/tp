@@ -15,4 +15,12 @@ class Project extends Model
 	{
 		return self::$project_db->select();
 	}
+	public function DataAdd($value)
+	{
+		return self::$project_db->insert($value);
+	}
+	public function selectProjectwhere($value)
+	{
+		return self::$project_db->where($value)->select();
+	}
 }

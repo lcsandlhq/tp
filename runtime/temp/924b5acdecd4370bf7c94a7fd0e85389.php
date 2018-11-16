@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:70:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\index\index.html";i:1541991528;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\base.html";i:1541989552;s:64:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\header.html";i:1542157473;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\left.html";i:1542186747;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:70:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\index\index.html";i:1541991528;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\base.html";i:1542345154;s:64:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\header.html";i:1542157473;s:62:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\left.html";i:1542334371;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +20,34 @@
 	<link rel="stylesheet" type="text/css" href="/static/js/datatables/extras/TableTools/media/css/TableTools.min.css" />
 	<link rel="stylesheet" href="/static/css/headerSib.css">
 	
+<style>
+/* .sub_3{
+	list-style: none;
+	clear: both;
+    margin-left: 25px;
+    border-left: 1px dotted #fafafa;
+    display: inline-block;
+    position: relative;
+    padding: 0px;
+    margin-top: -8px;
+    border-top: 1px dotted #fafafa;
+} */
+.sub_3 li{
+	list-style: none;
+	border-left: 1px dotted #fff;
+    margin: 0 !important;
+	/*border-top: 1px dotted #fafafa;*/
+}
+/*.sub_3 li span{
+	border-top: 1px dotted #fff;
+}*/
+.sub_3 li a{
+	margin-left: 15px;
+    color: #fff;
+    text-decoration: none;
+}
+</style>
+
 </head>
 <body>
 <header class="navbar clearfix" id="header">
@@ -78,13 +106,15 @@
 						<a>
 							<span class="sub-menu-text">建库管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
+								<span></span>
 								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>1]); ?>" target='demo_frame'>
 								<span class="sub-menu-text">未建库</span>
 								</a>
 							</li>
 							<li>
+								<span></span>
 								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>2]); ?>" target='demo_frame'>
 								<span class="sub-menu-text">已建库</span>
 								</a>
@@ -95,7 +125,7 @@
 						<a>
 							<span class="sub-menu-text">上机管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
 								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>3]); ?>" target='demo_frame'>
 								<span class="sub-menu-text">未上机</span>
@@ -112,7 +142,7 @@
 						<a>
 							<span class="sub-menu-text">数据分析管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
 								<a class="" href="<?php echo url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>5]); ?>" target='demo_frame'>
 								<span class="sub-menu-text">未数据分析</span>
@@ -139,14 +169,33 @@
 					<span class="menu-text">查询</span>
 				</a>
 			</li>
-			<?php if(($permissions == 1)): ?>
+			<?php if(($permissions == 1 or $permissions == 3)): ?>
+			<li class="has-sub">
+				<a href="<?php echo url('Financial/financial'); ?>" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="/static/img/newIcon/icon_report.png" alt="">
+					<span class="menu-text">财务</span>
+				</a>
+			</li>
+			<?php endif; if(($permissions == 1 or $permissions == 4)): ?>
+			<li class="has-sub">
+				<a href="<?php echo url('Reportupload/ReportUpload'); ?>" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="/static/img/newIcon/icon_maintenance2.png" alt="">
+					<span class="menu-text">报告上传</span>
+				</a>
+			</li>
+			<?php endif; if(($permissions == 1)): ?>
 			<li class="has-sub">
 				<a class="">
 				<img class="sidebar_icon" src="/static/img/newIcon/icon_setting.png" alt=""><span class="menu-text">系统管理</span>
 				<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="<?php echo url('Superconservator/superconservatoruser'); ?>" target='demo_frame'><span class="sub-menu-text">用户管理</span></a></li>
+					<li>
+						<a class="" href="<?php echo url('Superconservator/superconservatoruser'); ?>" target='demo_frame'><span class="sub-menu-text">用户管理</span></a>
+					</li>
+					<li>
+						<a class="" href="<?php echo url('Project/project'); ?>" target='demo_frame'><span class="sub-menu-text">项目管理</span></a>
+					</li>
 				</ul>
 			</li>
 			<?php endif; ?>
@@ -198,6 +247,12 @@
 	/*function check_remind() {
 		 	alert('');
 		 }*/
+</script>
+
+<script type="text/javascript">
+    setInterval(function working(){ 
+        window.location.reload()
+    },86400000);
 </script>
 
 </body>

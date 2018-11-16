@@ -20,13 +20,15 @@
 						<a>
 							<span class="sub-menu-text">建库管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
+								<span></span>
 								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>1])}" target='demo_frame'>
 								<span class="sub-menu-text">未建库</span>
 								</a>
 							</li>
 							<li>
+								<span></span>
 								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>2])}" target='demo_frame'>
 								<span class="sub-menu-text">已建库</span>
 								</a>
@@ -37,7 +39,7 @@
 						<a>
 							<span class="sub-menu-text">上机管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
 								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>3])}" target='demo_frame'>
 								<span class="sub-menu-text">未上机</span>
@@ -54,7 +56,7 @@
 						<a>
 							<span class="sub-menu-text">数据分析管理</span>
 						</a>
-						<ul class="sub">
+						<ul class="sub_3">
 							<li>
 								<a class="" href="{:url('Buildlibrarymanagement/BuildLibraryManagement',['hasnot'=>5])}" target='demo_frame'>
 								<span class="sub-menu-text">未数据分析</span>
@@ -81,6 +83,22 @@
 					<span class="menu-text">查询</span>
 				</a>
 			</li>
+			{if ($permissions == 1 or $permissions == 3)}
+			<li class="has-sub">
+				<a href="{:url('Financial/financial')}" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="__PUBLIC__/img/newIcon/icon_report.png" alt="">
+					<span class="menu-text">财务</span>
+				</a>
+			</li>
+			{/if}
+			{if ($permissions == 1 or $permissions == 4)}
+			<li class="has-sub">
+				<a href="{:url('Reportupload/ReportUpload')}" class="current" target='demo_frame'>
+					<img class="sidebar_icon" src="__PUBLIC__/img/newIcon/icon_maintenance2.png" alt="">
+					<span class="menu-text">报告上传</span>
+				</a>
+			</li>
+			{/if}
 			{if ($permissions == 1)}
 			<li class="has-sub">
 				<a class="">
@@ -88,7 +106,12 @@
 				<span class="arrow"></span>
 				</a>
 				<ul class="sub">
-					<li><a class="" href="{:url('Superconservator/superconservatoruser')}" target='demo_frame'><span class="sub-menu-text">用户管理</span></a></li>
+					<li>
+						<a class="" href="{:url('Superconservator/superconservatoruser')}" target='demo_frame'><span class="sub-menu-text">用户管理</span></a>
+					</li>
+					<li>
+						<a class="" href="{:url('Project/project')}" target='demo_frame'><span class="sub-menu-text">项目管理</span></a>
+					</li>
 				</ul>
 			</li>
 			{/if}

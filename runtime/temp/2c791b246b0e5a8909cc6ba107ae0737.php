@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\thequery\thequery.html";i:1542260672;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:78:"E:\wamp\www\aiyics\thinkphp\aiyi/../ay_app/index\view\financial\financial.html";i:1542347118;s:63:"E:\wamp\www\aiyics\thinkphp\ay_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,24 +127,18 @@ ul.showul li:not(:last-child) {
                                                                         <?php endforeach; endif; else: echo "" ;endif; ?>
                                                                     </select>
                                                                 </div>
-                                                                <div class="inputting_listTltie">样本姓名</div>
-                                                                    <div>
-                                                                        <input class="inputting_listInput" type="text" name="username" id="username"/>
-                                                                    </div>
 	                                                            <div class="inputting_listTltie">到样时间:</div>
 	                                                            <div class="" style="position:relative;">
 	                                                                <input type="text" name="sampledate"  autoComplete='off' id="reportrange" value="" class="inputting_listInput" style="margin: 0 10px 0 0;">
 	                                                                <span class="fa fa-times-circle inputting_circle" style="position: absolute;right:25px;top:10px;display:none"></span>
 	                                                            </div>
-                                                                <div class="inputting_listTltie">状态:</div>
+                                                                <div class="inputting_listTltie">负责人:</div>
                                                                 <div class="dropdown-sin-2">
                                                                     <select style="display:block;width:100%" class="inputting_listInput" placeholder="搜索状态" name="sample" >
                                                                         <option selected value="">请选择</option>
-                                                                        <option value="1">已到样</option>
-                                                                        <option value="2">建库中</option>
-                                                                        <option value="3">上机中</option>
-                                                                        <option value="4">数据分析</option>
-                                                                        <option value="5">下载</option>
+                                                                        <?php if(is_array($fzdw) || $fzdw instanceof \think\Collection || $fzdw instanceof \think\Paginator): $i = 0; $__LIST__ = $fzdw;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$fz): $mod = ($i % 2 );++$i;?>
+                                                                        <option value="<?php echo $fz['head']; ?>"><?php echo $fz['head']; ?></option>
+                                                                        <?php endforeach; endif; else: echo "" ;endif; ?>
                                                                     </select>
                                                                 </div>
 	                                                        </div>
@@ -189,6 +183,10 @@ ul.showul li:not(:last-child) {
 <script type="text/javascript">
 	jQuery(document).ready(function () {
         $('.dropdown-sin-1').dropdown({
+            readOnly: true,
+            input: '<input type="text" maxLength="20" placeholder="请输入搜索">'
+        });
+        $('.dropdown-sin-2').dropdown({
             readOnly: true,
             input: '<input type="text" maxLength="20" placeholder="请输入搜索">'
         });

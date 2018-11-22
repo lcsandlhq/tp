@@ -1,0 +1,179 @@
+{extend name="public:cssjs" /}
+{block name="main"}
+{include file="public:list" /}
+{/block}
+{block name="js"}
+<script type="text/javascript">
+var hasnot='{$hasnot}';
+if (hasnot == 1) {
+	$(window).load(function(){
+		var arr = new Array();
+		var sid= new Array();
+		var sampletypename = $('.sampletypename');
+		for (var i = 0;i <sampletypename.length; i++) {
+			if(sampletypename[i].attributes[1].value>=1){
+				arr=sampletypename[i].innerHTML.split('，');
+				sid=sampletypename[i].attributes[2].value.split('，');
+				var str = '';
+				for (var j =0; j < arr.length; j++) {
+					str+="<input type='checkbox' name='choose[]' value='"+sid[j]+"'>"+arr[j];
+				}
+				sampletypename[i].innerHTML=str;
+			}
+		}
+		// console.log(sampletypename)
+		
+	})
+}
+
+document.getElementById('checkItems').onclick=function() {  
+ // 获取所有的复选框  
+    var checkElements=document.getElementsByName('userid[]');  
+    if (this.checked) {  
+        for(var i=0;i<checkElements.length;i++){  
+            var checkElement=checkElements[i];  
+            checkElement.checked="checked";  
+        }  
+        //console.log(checkElements.length)
+        /*$(".gs").html("选中"+checkElements.length+"个默认板的位置有"+sl+"个");
+        j=checkElements.length;*/
+    }  
+    else{  
+        for(var i=0;i<checkElements.length;i++){  
+            var checkElement=checkElements[i];  
+            checkElement.checked=null;  
+        } 
+        //console.log(checkElements.length) 
+        /*$(".gs").html('');
+        j=0;*/
+    }
+}
+/*check=document.getElementsByName('check[]');
+for (var i = 0; i < check.length; i++) {
+		function item(i) {
+			check[i].onclick=function () {
+				//var count=0;
+			if (this.checked) {  
+				j++
+				//console.log(checkItems.checked)
+				//if (checkItems.checked) {}
+			}else{
+				j--
+			}
+			if (j==0) {
+				$(".gs").html('');
+			}else{
+				$(".gs").html("选中"+j+"个默认板的位置有"+sl+"个");
+			}
+			//console.log(j)
+			}
+		}(i)
+	item(i)
+}*/
+document.getElementById('button').onclick=function() {
+	var chckBox = document.getElementsByName("userid[]"); 
+	var choose = document.getElementsByName("choose[]"); 
+	var sampletypename = $('.sampletypename');
+	var choosezhi='';
+	var excelname=''; 
+    var ids = ""; 
+    var hasnot = '{$hasnot}';
+    var sampletypenamepd=false;
+    for(var i =0 ; i<chckBox.length; i++){  
+        if(chckBox[i].checked){  
+            //ids.push({barcode:chckBox[i].value});
+            // ids += chckBox[i].value + ",";
+            console.log(sampletypename)
+        }  
+    }
+    var sampletypename = $('.sampletypename');
+	for (var i = 0;i <sampletypename.length; i++) {
+		if (sampletypename[i].attributes[1].value == 1) {
+			sampletypenamepd=true;
+		}else if(sampletypename[i].attributes[1].value>=1){
+			for(var j =0 ; j<choose.length; j++){  
+		        if(choose[i].checked){  
+		            //ids.push({barcode:chckBox[i].value});
+		            sampletypenamepd=true;
+		            //console.log(abc)
+		        }  
+		    }
+		}
+	}
+    /*if (ids == '') {
+    	alert("请选择数据");
+    }else{
+    	if (hasnot == 3) {
+    		$('.sample_batch_titleBox').html('生成excel表格');
+    		$('.sample_container_title').html('生成excel表格');
+    		$('.sample_listTltie').html('生成excel表格名称');
+    		$('.sample_batch_shaow').css("display","block");
+    	}else{
+	    	$.ajax({
+	    		"type":"post",
+	    		"url":"{:url('Buildlibrarymanagement/BuildLibraryManagementState')}",
+	    		"dataType" : 'json',
+	    		"data" : {
+	    			id:ids,
+	    			hasnot:hasnot,
+	    			excelname:excelname
+	    		},
+	    		success : function(data) {
+	    			// console.log(data)  
+	    			if (data.successof == 1) {
+	    				alert(data.data); 
+	    				window.location.reload() 
+	    			}else{
+	              	    alert(data.data);  
+	    			}
+	                //  window.location.reload() 
+	            },  
+	            error : function(data) {  
+	                alert("网络错误，请检查网络");  
+	            }  
+	    	});
+    	}
+    }*/
+
+};
+$('#sample_batch_img').click(function(){
+	$('.sample_batch_shaow').css("display", "none");
+});
+$('input[name=sub]').click(function(){
+	var chckBox = document.getElementsByName("userid[]"); 
+	var excelname=$('input[name=excelname]').val(); 
+    var ids = ""; 
+    var hasnot = '{$hasnot}';
+    for(var i =0 ; i<chckBox.length; i++){  
+        if(chckBox[i].checked){  
+            //ids.push({barcode:chckBox[i].value});
+            ids += chckBox[i].value + ",";
+            //console.log(abc)
+        }  
+    }
+    $.ajax({
+		"type":"post",
+		"url":"{:url('Buildlibrarymanagement/BuildLibraryManagementState')}",
+		"dataType" : 'json',
+		"data" : {
+			id:ids,
+			hasnot:hasnot,
+			excelname:excelname
+		},
+		success : function(data) {
+			// console.log(data)  
+			if (data.successof == 1) {
+				alert(data.data); 
+				window.location.reload() 
+			}else{
+          	    alert(data.data);  
+			}
+            //  window.location.reload() 
+        },  
+        error : function(data) {  
+            alert("网络错误，请检查网络");  
+        }  
+	});
+});
+</script>
+{/block}

@@ -23,4 +23,8 @@ class Sampletype extends Model
 	{
 		return self::$sampletype_db->insert($value);
 	}
+	public function selectabbreviation($value)
+	{
+		return self::$sampletype_db->where($value)->find();
+	}
 }

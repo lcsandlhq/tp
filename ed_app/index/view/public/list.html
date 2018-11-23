@@ -50,6 +50,9 @@
 												{/if}
 												<th>来源</th>
 												<th>编号</th>
+												{if ($hasnot neq 1)}
+												<th>实验编号</th>
+												{/if}
 												<th>姓名</th>
 												<th>性别</th>
 												<th>项目</th>
@@ -67,6 +70,9 @@
 												{/if}
 												<td>{$sj.account}</td>
 												<td>{$sj.number}</td>
+												{if ($hasnot neq 1)}
+												<td>{$sj.numberabbreviationname}</td>
+												{/if}
 												<td>{$sj.username}</td>
 												<td>{$sj.gender}</td>
 												<td>{$sj.projectname}</td>
@@ -79,7 +85,7 @@
 											{/volist}
 											{empty name="querydata"}
 											<tr>
-												<td {if ($hasnot ==1 or $hasnot ==3 or $hasnot ==5)} colspan="10" {else /} colspan="9" {/if} style="text-align: center;">未查到数据......</td>
+												<td {if ($hasnot ==1 )} colspan="10" {elseif ($hasnot ==3 or $hasnot ==5)} colspan="11" {else /} colspan="10" {/if} style="text-align: center;">未查到数据......</td>
 											</tr>
 											{/empty}
 										</tbody>

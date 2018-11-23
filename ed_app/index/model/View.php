@@ -14,12 +14,12 @@ class View extends Model
 	public function dataQuery($value)
 	{
 		return db('view_information')->field("account,id,number,username,projectname,age,gender,sampledate,GROUP_CONCAT(carcinomaname separator '，') as carcinomaname,GROUP_CONCAT(sampletypename separator '，') as sampletypename,completedate,sample,length(GROUP_CONCAT(sid separator ','))-length(REPLACE (GROUP_CONCAT(sid separator ','), ',', ''))as sid,
-GROUP_CONCAT(sid separator '，') as qbsid")->where($value)->order('number DESC')->group('number')->paginate(30,false);
+GROUP_CONCAT(sid separator '，') as qbsid,numberabbreviationname")->where($value)->order('number DESC')->group('number')->paginate(30,false);
 	}
 	public function dataQueryCX($value,$keyword)
 	{
 		return db('view_information')->field("account,id,number,username,projectname,age,gender,sampledate,GROUP_CONCAT(carcinomaname separator '，') as carcinomaname,GROUP_CONCAT(sampletypename separator '，') as sampletypename,completedate,sample,length(GROUP_CONCAT(sid separator ','))-length(REPLACE (GROUP_CONCAT(sid separator ','), ',', ''))as sid,
-GROUP_CONCAT(sid separator '，') as qbsid")->where($value)->order('number DESC')->group('number')->paginate(30,false,array('query'=>$keyword));
+GROUP_CONCAT(sid separator '，') as qbsid,numberabbreviationname")->where($value)->order('number DESC')->group('number')->paginate(30,false,array('query'=>$keyword));
 	}
 	public function dataExcel($value)
 	{

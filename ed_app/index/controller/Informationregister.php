@@ -82,6 +82,7 @@ class Informationregister extends Base
 	public function cancerSample()
 	{
 		$addname = input("post.addname");
+		$abbreviation=input("post.abbreviation");
 		$hid= input("post.hid");
 		if ($hid ==1) {
 			$add['carcinomaname']=$addname;
@@ -89,6 +90,7 @@ class Informationregister extends Base
 		}
 		if ($hid == 2) {
 			$add['sampletypename']=$addname;
+			$add['abbreviation']=$abbreviation;
 			$cancersample=model('sampletype')->addsarcinoma($add);
 		}
 		if ($cancersample) {

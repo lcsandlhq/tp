@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:97:"E:\wamp\www\aiyics\thinkphp\ed/../ed_app/index\view\informationregister\information_register.html";i:1542867367;s:63:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:97:"E:\wamp\www\aiyics\thinkphp\ed/../ed_app/index\view\informationregister\information_register.html";i:1542963710;s:63:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\cssjs.html";i:1542174800;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -216,6 +216,13 @@
 							<!-- <div><input type="text"  value="" id="demo-1"></div> -->
 						</div>
 					</div>
+					<div class="row abbreviation" style="display: none;">
+						<div class="col-md-4 .col-lg-4 .col-sm-4 ">
+							<div class="sample_listTltie"><samp class="addnameabbreviation"></samp>名称:</div>
+							<div><input class="sample_listInput" type="text" name="addnameabbreviation"  /></div>
+							<!-- <div><input type="text"  value="" id="demo-1"></div> -->
+						</div>
+					</div>
 				</div>
 				<div class="sample_batch_btnBox">
 					<input type="hidden" name="hid" value="">
@@ -317,24 +324,38 @@ $('.addcss').click(function(){
 		$('.addname').html('癌种');
 	}else if (val == 2) {
 		$('.addname').html('样本类型');
+		$('.addnameabbreviation').html('简写');
+		$('.abbreviation').css("display","block");
 	}
 	$("input[name=hid]").val(val);
 	$('.sample_batch_shaow').css("display","block");
 });
 $('#sample_batch_img').click(function(){
 	$('.sample_batch_shaow').css("display", "none");
+	$('.abbreviation').css("display", "none");
+	$('.addname').html('');
+	$('.addname').html('');
+	$('.addnameabbreviation').html('')
 });
 $('input[name=sub]').click(function (){
 	var addname = $('input[name=addname]').val();
 	var hid = $('input[name=hid]').val();
-	console.log(addname,hid);
+	var addnameabbreviation=$('input[name=addnameabbreviation]').val();
+	if (hid == 2) {
+		if(addnameabbreviation == '' || addnameabbreviation == null){
+			alert('请填写简写');
+			return false;
+		}
+	}
+	// console.log(addname,hid,addnameabbreviation);
 	$.ajax({
 		"type":"post",
 		"url":"<?php echo url('Informationregister/cancerSample'); ?>",
 		"dataType" : 'json',
 		"data" : {
 			addname:addname,
-			hid:hid
+			hid:hid,
+			abbreviation:addnameabbreviation
 		},
 		success : function(data) {
 			// console.log(data)  

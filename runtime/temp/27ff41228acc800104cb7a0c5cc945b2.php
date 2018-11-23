@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:104:"E:\wamp\www\aiyics\thinkphp\ed/../ed_app/index\view\buildlibrarymanagement\build_library_management.html";i:1542878747;s:63:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\cssjs.html";i:1542174800;s:62:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\list.html";i:1542872285;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:104:"E:\wamp\www\aiyics\thinkphp\ed/../ed_app/index\view\buildlibrarymanagement\build_library_management.html";i:1542961930;s:63:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\cssjs.html";i:1542174800;s:62:"E:\wamp\www\aiyics\thinkphp\ed_app\index\view\public\list.html";i:1542962123;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +77,9 @@
 												<?php endif; ?>
 												<th>来源</th>
 												<th>编号</th>
+												<?php if(($hasnot != 1)): ?>
+												<th>实验编号</th>
+												<?php endif; ?>
 												<th>姓名</th>
 												<th>性别</th>
 												<th>项目</th>
@@ -94,6 +97,9 @@
 												<?php endif; ?>
 												<td><?php echo $sj['account']; ?></td>
 												<td><?php echo $sj['number']; ?></td>
+												<?php if(($hasnot != 1)): ?>
+												<td><?php echo $sj['numberabbreviationname']; ?></td>
+												<?php endif; ?>
 												<td><?php echo $sj['username']; ?></td>
 												<td><?php echo $sj['gender']; ?></td>
 												<td><?php echo $sj['projectname']; ?></td>
@@ -105,7 +111,7 @@
 											</tr>
 											<?php endforeach; endif; else: echo "" ;endif; if(empty($querydata) || (($querydata instanceof \think\Collection || $querydata instanceof \think\Paginator ) && $querydata->isEmpty())): ?>
 											<tr>
-												<td <?php if(($hasnot ==1 or $hasnot ==3 or $hasnot ==5)): ?> colspan="10" <?php else: ?> colspan="9" <?php endif; ?> style="text-align: center;">未查到数据......</td>
+												<td <?php if(($hasnot ==1 )): ?> colspan="10" <?php elseif(($hasnot ==3 or $hasnot ==5)): ?> colspan="11" <?php else: ?> colspan="10" <?php endif; ?> style="text-align: center;">未查到数据......</td>
 											</tr>
 											<?php endif; ?>
 										</tbody>
@@ -180,14 +186,16 @@ if (hasnot == 1) {
 		var arr = new Array();
 		var sid= new Array();
 		var sampletypename = $('.sampletypename');
+		var valuename=sampletypename.prev().prev().prev().prev().prev().prev().find('#userid');
 		for (var i = 0;i <sampletypename.length; i++) {
 			if(sampletypename[i].attributes[1].value>=1){
 				arr=sampletypename[i].innerHTML.split('，');
 				sid=sampletypename[i].attributes[2].value.split('，');
 				var str = '';
 				for (var j =0; j < arr.length; j++) {
-					str+="<input type='checkbox' name='choose[]' value='"+sid[j]+"'>"+arr[j];
+					str+="<input type='checkbox'class='inchoose"+valuename[i].value+"' name='choose[]' value='"+sid[j]+"'>"+arr[j];
 				}
+				// var wzstr="<span class='choose'>"+str+"</span>"
 				sampletypename[i].innerHTML=str;
 			}
 		}
@@ -249,28 +257,34 @@ document.getElementById('button').onclick=function() {
     var ids = ""; 
     var hasnot = '<?php echo $hasnot; ?>';
     var sampletypenamepd=false;
+    var qbids=new Array();
+    
     for(var i =0 ; i<chckBox.length; i++){  
         if(chckBox[i].checked){  
             //ids.push({barcode:chckBox[i].value});
-            // ids += chckBox[i].value + ",";
-            console.log(sampletypename)
+            ids += chckBox[i].value + ",";
+            var a=sampletypename.find(".inchoose"+chckBox[i].value);
+            if (a.length>1) {
+            	var b='';
+            	for (var j = 0; j<a.length; j++) {
+            		if (a[j].checked) {
+            			sj={iid:chckBox[i].value,sid:a[j].value};
+            			b+=sj;
+		            	qbids.push(sj)
+            		}
+	            }
+	            if (b==''){
+        			alert('请选择样本类型')
+        			return false;
+        		}
+            }else{
+            	sj={iid:chckBox[i].value,sid:sampletypename[i].attributes[2].value};
+            	qbids.push(sj);
+            } 
         }  
     }
-    var sampletypename = $('.sampletypename');
-	for (var i = 0;i <sampletypename.length; i++) {
-		if (sampletypename[i].attributes[1].value == 1) {
-			sampletypenamepd=true;
-		}else if(sampletypename[i].attributes[1].value>=1){
-			for(var j =0 ; j<choose.length; j++){  
-		        if(choose[i].checked){  
-		            //ids.push({barcode:chckBox[i].value});
-		            sampletypenamepd=true;
-		            //console.log(abc)
-		        }  
-		    }
-		}
-	}
-    /*if (ids == '') {
+    // console.log(ids)
+    if (ids == '') {
     	alert("请选择数据");
     }else{
     	if (hasnot == 3) {
@@ -286,7 +300,8 @@ document.getElementById('button').onclick=function() {
 	    		"data" : {
 	    			id:ids,
 	    			hasnot:hasnot,
-	    			excelname:excelname
+	    			excelname:excelname,
+	    			qbids:qbids
 	    		},
 	    		success : function(data) {
 	    			// console.log(data)  
@@ -303,7 +318,7 @@ document.getElementById('button').onclick=function() {
 	            }  
 	    	});
     	}
-    }*/
+    }
 
 };
 $('#sample_batch_img').click(function(){

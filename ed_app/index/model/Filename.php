@@ -21,7 +21,7 @@ class Filename extends Model
 	}
 	public function selectqbfilename($value)
 	{
-		return self::$filename_db->field("id,fileurl")->where($value)->order('filedate,filenumber DESC')->select();
+		return self::$filename_db->field("id,fileurl")->where($value)->order('filedate DESC,filenumber DESC')->select();
 	}
 	public function selectonefilename($value)
 	{

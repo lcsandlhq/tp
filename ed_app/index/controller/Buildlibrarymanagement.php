@@ -113,14 +113,16 @@ class Buildlibrarymanagement extends Base
 	{
 		$id=substr(input("post.id"),0,-1);
 		$excelname=input("post.excelname");
-		$where['id']=$id;
+		$where['id']=array("in",$id);
 		$hasnot=input("post.hasnot");
+		$qbids = $_POST['qbids'];
 		switch ($hasnot) {
 			case '1':
 				$up['sample']=2;
 				if(!$this->savefiledatalibraries($id,2)){
 					exit();
 				}
+				$this->saveabbreviation($qbids);
 				break;
 			case '3':
 				$up['sample']=3;
@@ -135,7 +137,7 @@ class Buildlibrarymanagement extends Base
 				exit();
 				break;
 		}
-		
+		// $data =self::$informationregister=model('Informationregister')->datamodification($where,$up);
 		if(self::$informationregister=model('Informationregister')->datamodification($where,$up)){
 			$data=$this->successfulResults($hasnot);
 		}else{
@@ -290,5 +292,23 @@ class Buildlibrarymanagement extends Base
 	    $objwriter = new \PHPExcel_Writer_Excel2007($phpexcel);
 	    $objwriter->save("php://output");
 	    exit();
+	}
+	private function saveabbreviation($value)
+	{
+		foreach ($value as $val) {
+			$iid['id']=$val['iid'];
+			$sid['id']=$val['sid'];
+			$abb=model('Sampletype')->selectabbreviation($sid);
+			$numberabb=model('Informationregister')->selectnumber($iid);
+			if (empty($numberabb['numberabbreviationname'])) {
+				$save['numberabbreviationname']=$numberabb['number'].$abb['abbreviation'];
+			}else{
+				$save['numberabbreviationname']=$numberabb['numberabbreviationname'].",".$numberabb['number'].$abb['abbreviation'];
+			}
+			model('Informationregister')->dataModification($iid,$save);
+			$add['numberabbreviationname']=$numberabb['number'].$abb['abbreviation'];
+			$add['number']=$numberabb['number'];
+			model('Inslist')->insertinslist($add);
+		}
 	}
 }

@@ -10,14 +10,16 @@ if (hasnot == 1) {
 		var arr = new Array();
 		var sid= new Array();
 		var sampletypename = $('.sampletypename');
+		var valuename=sampletypename.prev().prev().prev().prev().prev().prev().find('#userid');
 		for (var i = 0;i <sampletypename.length; i++) {
 			if(sampletypename[i].attributes[1].value>=1){
 				arr=sampletypename[i].innerHTML.split('，');
 				sid=sampletypename[i].attributes[2].value.split('，');
 				var str = '';
 				for (var j =0; j < arr.length; j++) {
-					str+="<input type='checkbox' name='choose[]' value='"+sid[j]+"'>"+arr[j];
+					str+="<input type='checkbox'class='inchoose"+valuename[i].value+"' name='choose[]' value='"+sid[j]+"'>"+arr[j];
 				}
+				// var wzstr="<span class='choose'>"+str+"</span>"
 				sampletypename[i].innerHTML=str;
 			}
 		}
@@ -79,28 +81,34 @@ document.getElementById('button').onclick=function() {
     var ids = ""; 
     var hasnot = '{$hasnot}';
     var sampletypenamepd=false;
+    var qbids=new Array();
+    
     for(var i =0 ; i<chckBox.length; i++){  
         if(chckBox[i].checked){  
             //ids.push({barcode:chckBox[i].value});
-            // ids += chckBox[i].value + ",";
-            console.log(sampletypename)
+            ids += chckBox[i].value + ",";
+            var a=sampletypename.find(".inchoose"+chckBox[i].value);
+            if (a.length>1) {
+            	var b='';
+            	for (var j = 0; j<a.length; j++) {
+            		if (a[j].checked) {
+            			sj={iid:chckBox[i].value,sid:a[j].value};
+            			b+=sj;
+		            	qbids.push(sj)
+            		}
+	            }
+	            if (b==''){
+        			alert('请选择样本类型')
+        			return false;
+        		}
+            }else{
+            	sj={iid:chckBox[i].value,sid:sampletypename[i].attributes[2].value};
+            	qbids.push(sj);
+            } 
         }  
     }
-    var sampletypename = $('.sampletypename');
-	for (var i = 0;i <sampletypename.length; i++) {
-		if (sampletypename[i].attributes[1].value == 1) {
-			sampletypenamepd=true;
-		}else if(sampletypename[i].attributes[1].value>=1){
-			for(var j =0 ; j<choose.length; j++){  
-		        if(choose[i].checked){  
-		            //ids.push({barcode:chckBox[i].value});
-		            sampletypenamepd=true;
-		            //console.log(abc)
-		        }  
-		    }
-		}
-	}
-    /*if (ids == '') {
+    // console.log(ids)
+    if (ids == '') {
     	alert("请选择数据");
     }else{
     	if (hasnot == 3) {
@@ -116,7 +124,8 @@ document.getElementById('button').onclick=function() {
 	    		"data" : {
 	    			id:ids,
 	    			hasnot:hasnot,
-	    			excelname:excelname
+	    			excelname:excelname,
+	    			qbids:qbids
 	    		},
 	    		success : function(data) {
 	    			// console.log(data)  
@@ -133,7 +142,7 @@ document.getElementById('button').onclick=function() {
 	            }  
 	    	});
     	}
-    }*/
+    }
 
 };
 $('#sample_batch_img').click(function(){

@@ -27,4 +27,8 @@ class Informationregister extends Model
 	{
 		return self::$informationregister_db->alias('i')->field("l.account,GROUP_CONCAT(i.sampletype separator ',') AS sampletype,sum(i.price) as price")->join('er_login l','i.lid=l.id ','LEFT')->where($value)->group('i.lid')->paginate(30,false,array('query'=>$keyword));
 	}
+	public function selectnumber($value)
+	{
+		return self::$informationregister_db->field("number,numberabbreviationname")->where($value)->find();
+	}
 }
